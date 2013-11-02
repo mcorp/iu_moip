@@ -10,6 +10,10 @@ module IuMoip
       @doc ||= Nokogiri::XML::Document.new
     end
 
+    def to_xml
+      doc.to_xml
+    end
+
     def enviar_instrucao
       @enviar_instrucao ||= create_node(doc, 'EnviarInstrucao')
     end
@@ -43,7 +47,7 @@ module IuMoip
       @id_proprio ||= create_node(instrucao_unica, 'IdProprio', id)
     end
 
-    def commisoes
+    def comisoes
       @comissoes ||= create_node(instrucao_unica, 'Comissoes')
     end
 
