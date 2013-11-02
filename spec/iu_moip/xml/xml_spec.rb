@@ -55,7 +55,7 @@ describe IuMoip::XML do
       subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Valores>\n      <Valor Moeda=\"BRL\">1.00</Valor>\n      <Acrescimo Moeda=\"BRL\">2.00</Acrescimo>\n      <Deducao Moeda=\"BRL\">3.00</Deducao>\n    </Valores>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
 
-    it '@boleto' do
+    it '#boleto' do
       {dias_expiracao: '1',
        data_vencimento: '2013-10-20',
        instrucao1: 'Instrucao 1',
@@ -66,6 +66,36 @@ describe IuMoip::XML do
         subject.boleto.send(k).should == v
       end
       subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Boleto>\n      <DiasExpiracao>1</DiasExpiracao>\n      <DataVencimento>2013-10-20</DataVencimento>\n      <Instrucao1>Instrucao 1</Instrucao1>\n      <Instrucao2>Instrucao 2</Instrucao2>\n      <Instrucao3>Instrucao 3</Instrucao3>\n      <URLLogo>http://url.to/logo</URLLogo>\n    </Boleto>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
+    end
+
+    it '#pagador' do
+      {
+        nome: 'Marco',
+        login_moip: 'login@moip',
+        id_pagador: '1234',
+        email: 'marco@somewhere',
+        telefone_celular: '4188889999',
+        apelido: 'apelido',
+        identidade: '123456'
+        }.each do |k, v|
+          subject.pagador.send("#{k}=", v)
+          subject.pagador.send(k).should == v
+        end
+        { 
+          logradouro: 'Rua dos Bobos',
+          numero: '0',
+          complemento: 'casa',
+          bairro: 'Por ae',
+          cep: '89011-999',
+          cidade: 'Curitiba',
+          estado: 'PR',
+          pais: 'BRA',
+          telefone_fixo: '1166678888'
+        }.each do |k,v|
+          subject.pagador.endereco_cobranca.send("#{k}=", v)
+          subject.pagador.endereco_cobranca.send(k).should == v
+        end
+        subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Pagador>\n      <Nome>Marco</Nome>\n      <LoginMoIp>login@moip</LoginMoIp>\n      <IdPagador>1234</IdPagador>\n      <Email>marco@somewhere</Email>\n      <TelefoneCelular>4188889999</TelefoneCelular>\n      <Apelido>apelido</Apelido>\n      <Identidade>123456</Identidade>\n      <EnderecoCobranca>\n        <Logradouro>Rua dos Bobos</Logradouro>\n        <Numero>0</Numero>\n        <Complemento>casa</Complemento>\n        <Bairro>Por ae</Bairro>\n        <CEP>89011-999</CEP>\n        <Cidade>Curitiba</Cidade>\n        <Estado>PR</Estado>\n        <Pais>BRA</Pais>\n        <TelefoneFixo>1166678888</TelefoneFixo>\n      </EnderecoCobranca>\n    </Pagador>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
   end
 end
