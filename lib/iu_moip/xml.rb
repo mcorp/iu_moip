@@ -87,7 +87,7 @@ module IuMoip
     end
 
     def formas_pagamento
-      @formas_pagamento ||= create_node('FormasPagamento')
+      @formas_pagamento ||= create_node(instrucao_unica, 'FormasPagamento')
     end
 
     def add_forma_pagamento(type)
