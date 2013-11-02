@@ -2,17 +2,26 @@ module IuMoip
   class XML
     class Base
       include IuMoip::XML::CreateNode
-      attr_reader :root
-      def initialize(_root)
+      attr_reader :root, :doc
+      def initialize(_doc, _root)
         @root = _root
+        @doc  = _doc
+      end
+
+      def self.name(n = nil)
+        return @name unless @name.nil?
+        @name = n || self.to_s.split('::').last
+      end
+
+      def self.name=(n)
+        @name = n
       end
 
       def base_element
-        @base_element ||= create_node(root, self.class.to_s)
+        @base_element ||= create_node(root, self.class.name)
       end
 
       def self.implement_set_nodes(*args)
-        puts "args: #{args.inspect} #{caller.inspect}"
         args.each do |method|
           define_method("#{method}=") do |val|
             v = instance_variable_get("@#{method}")

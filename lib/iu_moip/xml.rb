@@ -74,7 +74,7 @@ module IuMoip
     end
 
     def pagador
-      @pagador ||= Pagador.new(instrucao_unica)
+      @pagador ||= Pagador.new(doc, instrucao_unica)
     end
 
     def pagador_valid?(attrs)
@@ -116,7 +116,7 @@ module IuMoip
     end
 
     def boleto
-      @boleto ||= Boleto.new(instrucao_unica)
+      @boleto ||= Boleto.new(doc, instrucao_unica)
     end
   end
 end
