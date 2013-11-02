@@ -2,9 +2,9 @@ module IuMoip
   class XML
     class Base
       include IuMoip::XML::CreateNode
-      attr_reader :root, :doc
-      def initialize(_doc, _root)
-        @root = _root
+      attr_reader :parent, :doc
+      def initialize(_doc, _parent)
+        @parent = _parent
         @doc  = _doc
       end
 
@@ -18,7 +18,7 @@ module IuMoip
       end
 
       def base_element
-        @base_element ||= create_node(root, self.class.name)
+        @base_element ||= create_node(parent, self.class.name)
       end
 
       def self.implement_set_nodes(*args)
