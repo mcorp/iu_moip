@@ -22,7 +22,7 @@ describe IuMoip::XML do
 
     it '#add_forma_pagamento' do
       subject.add_forma_pagamento(:boleto_bancario)
-      subject.to_xml.should == 'a'
+      subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <FormasPagamento>\n      <FormaPagamento>BoletoBancario</FormaPagamento>\n    </FormasPagamento>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
   end
 end
