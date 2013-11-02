@@ -39,5 +39,10 @@ describe IuMoip::XML do
       subject.recebedor('login@moip', 'apelido')
       subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Recebedor>\n      <LoginMoIP>login@moip</LoginMoIP>\n      <Apelido>apelido</Apelido>\n    </Recebedor>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
+
+    it '#add_comissao' do
+      subject.add_comissao('login@moip', 'leecher', fixo: 2.41, percentual: 1.02)
+      subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Comissoes>\n      <Comissionamento>\n        <LoginMoIP>login@moip</LoginMoIP>\n      </Comissionamento>\n      <Razao>leecher</Razao>\n      <ValorFixo>2.41</ValorFixo>\n      <ValorPercentual>1.02</ValorPercentual>\n    </Comissoes>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
+    end
   end
 end
