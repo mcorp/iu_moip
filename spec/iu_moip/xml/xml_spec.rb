@@ -63,6 +63,7 @@ describe IuMoip::XML do
        instrucao3: 'Instrucao 3',
        url_logo: 'http://url.to/logo', }.each do |k, v|
         subject.boleto.send("#{k}=", v)
+        subject.boleto.send(k).should == v
       end
       subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Boleto>\n      <DiasExpiracao>1</DiasExpiracao>\n      <DataVencimento>2013-10-20</DataVencimento>\n      <Instrucao1>Instrucao 1</Instrucao1>\n      <Instrucao2>Instrucao 2</Instrucao2>\n      <Instrucao3>Instrucao 3</Instrucao3>\n      <URLLogo>http://url.to/logo</URLLogo>\n    </Boleto>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
