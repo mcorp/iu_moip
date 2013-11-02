@@ -22,7 +22,7 @@ module IuMoip
       end
 
       def format_word(word)
-        return word.upcase if ['url'].include?(word.downcase)
+        return word.upcase if ['url', 'cep'].include?(word.downcase)
         word.capitalize
       end
     end
