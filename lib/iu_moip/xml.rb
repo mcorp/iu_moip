@@ -47,7 +47,7 @@ module IuMoip
       @id_proprio ||= create_node(instrucao_unica, 'IdProprio', id)
     end
 
-    def comisoes
+    def comissoes
       @comissoes ||= create_node(instrucao_unica, 'Comissoes')
     end
 
