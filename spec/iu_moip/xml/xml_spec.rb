@@ -49,5 +49,10 @@ describe IuMoip::XML do
       subject.id_proprio('lalala')
       subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <IdProprio>lalala</IdProprio>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
+
+    it '#valores' do
+      subject.valores(1, 2, 3)
+      subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Valores>\n      <Valor Moeda=\"BRL\">1.00</Valor>\n      <Acrescimo Moeda=\"BRL\">2.00</Acrescimo>\n      <Deducao Moeda=\"BRL\">3.00</Deducao>\n    </Valores>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
+    end
   end
 end
