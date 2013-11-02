@@ -29,5 +29,10 @@ describe IuMoip::XML do
       subject.add_messagem('mensagem!')
       subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Messagens>\n      <Message>mensagem!</Message>\n    </Messagens>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
+
+    it '#entrega' do
+      subject.entrega(10.3)
+      subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Entrega>\n      <Destino>MesmoCobranca</Destino>\n      <CalculoFrete>\n        <Tipo>Proprio</Tipo>\n        <ValorFixo>10.30</ValorFixo>\n      </CalculoFrete>\n    </Entrega>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
+    end
   end
 end
