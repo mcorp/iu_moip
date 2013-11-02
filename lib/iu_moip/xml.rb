@@ -78,7 +78,7 @@ module IuMoip
     end
 
     def pagador_valid?(attrs)
-      f = [:nome, :email , :id_pagador, :logradouro, :numero, :cidade, :estado, :cep, :telefone_fixo]
+      f = [:nome, :email, :id_pagador, :logradouro, :numero, :cidade, :estado, :cep, :telefone_fixo]
       (f & attrs.keys).size >= f.size
     end
 
