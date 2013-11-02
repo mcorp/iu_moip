@@ -34,5 +34,10 @@ describe IuMoip::XML do
       subject.entrega(10.3)
       subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Entrega>\n      <Destino>MesmoCobranca</Destino>\n      <CalculoFrete>\n        <Tipo>Proprio</Tipo>\n        <ValorFixo>10.30</ValorFixo>\n      </CalculoFrete>\n    </Entrega>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
     end
+
+    it '#recebedor' do
+      subject.recebedor('login@moip', 'apelido')
+      subject.to_xml.should == "<?xml version=\"1.0\"?>\n<EnviarInstrucao>\n  <InstrucaoUnica TipoValidacao=\"Transparente\">\n    <Recebedor>\n      <LoginMoIP>login@moip</LoginMoIP>\n      <Apelido>apelido</Apelido>\n    </Recebedor>\n  </InstrucaoUnica>\n</EnviarInstrucao>\n"
+    end
   end
 end
